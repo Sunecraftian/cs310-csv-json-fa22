@@ -100,6 +100,5 @@ public class ConverterTest {
         String csv = Converter.jsonToCsv(json);
         assertEquals(csvString, csv);
         
-    }
-    
+    }    
 }
