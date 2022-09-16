@@ -63,13 +63,10 @@ public class Converter {
         String results = "";
         
         try {
-            
             // Initialize CSV Reader and Iterator
             CSVReader reader = new CSVReader(new StringReader(csvString));
             List<String[]> full = reader.readAll();
             Iterator<String[]> iterator = full.iterator();
-            
-            /* INSERT YOUR CODE HERE */
 
             // Initialize JSON Object
             JSONObject json = new JSONObject();
@@ -89,25 +86,25 @@ public class Converter {
             
             // Get Row Headers and Data
             while (iterator.hasNext()) {
-                String[] row = iterator.next();
-                rowHeaders.add(row[0]);
-                JSONArray data = new JSONArray();
-                for (int i = 1; i < row.length; i++) {
-                    data.add(Integer.parseInt(row[i]));
+                String[] row = iterator.next(); // Get next row
+                rowHeaders.add(row[0]); // Add row header to rowHeaders array
+                JSONArray data = new JSONArray(); // Create new data array
+                for (int i = 1; i < row.length; i++) { 
+                    data.add(Integer.parseInt(row[i])); // Add data to data array
                 }
-                rowData.add(data);
+                rowData.add(data); // Add data array to rowData array
             }
-            json.put("rowHeaders", rowHeaders);
-            json.put("data", rowData);
+            json.put("rowHeaders", rowHeaders); // Add rowHeaders array to json object
+            json.put("data", rowData); // Add rowData array to json object
 
             // Write JSON Object to String
-            results = JSONValue.toJSONString(json);
+            results = JSONValue.toJSONString(json); // Write json object to string
             
+            reader.close(); // Close CSV Reader
         }
         catch(Exception e) { e.printStackTrace(); }
         
         // Return JSON String
-        
         return results.trim();
         
     }
@@ -152,14 +149,13 @@ public class Converter {
                 csvWriter.writeNext(row); // Write row headers and row data to CSV
             }
            
-            results = writer.toString();
+            results = writer.toString(); // Write CSV to String
 
-            csvWriter.close();
+            csvWriter.close(); // Close CSV Writer
         }
         catch(Exception e) { e.printStackTrace(); }
         
         // Return CSV String
-        
         return results.trim();
         
     }	
